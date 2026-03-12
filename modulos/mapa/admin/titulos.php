@@ -36,20 +36,20 @@ include 'card_mapa.php';
 	
 	<script type='text/javascript'>
 		
-		$('#add_marcador').click(function(event){
+		document.getElementById('add_marcador').addEventListener('click', function(event){
 			event.preventDefault();
-			if($('input[name="nombre"]').val().length<1){
+			if(document.querySelector('input[name="nombre"]').value.length < 1){
 				alert("Escribe un nombre");
 				return;
 			}
-			if(marcador === undefined){
+			if(typeof marcador === 'undefined' || marcador === null){
 				alert("Posiciona el marcador en el mapa primero.");
 				return;
 			}
 			var pos = marcador.getLatLng();
-			$('input[name="x"]').val(pos.lat);
-			$('input[name="y"]').val(pos.lng);
-			$('#form_add_titulo').submit();
+			document.querySelector('input[name="x"]').value = pos.lat;
+			document.querySelector('input[name="y"]').value = pos.lng;
+			document.getElementById('form_add_titulo').submit();
 			
 		});
 		
@@ -59,8 +59,8 @@ include 'card_mapa.php';
 		map.on('click', function(e){
 			var lat = e.latlng.lat.toFixed(0); 
 			var lng = e.latlng.lng.toFixed(0);
-			var tam = $('#selector_tam').val();
-			var nombre = $('#input_nombre').val();
+			var tam = document.getElementById('selector_tam').value;
+			var nombre = document.getElementById('input_nombre').value;
 			let latn = +lat;
 			let lngn = +lng;
 			icono_texto = L.divIcon({
@@ -100,7 +100,7 @@ include 'card_mapa.php';
 				<td><a style="text-decoration:none;" href="controller\eliminar_titulo.php?id='.$m['id'].'" onclick="return confirm(\'¿Eliminar titulo '.$m['nombre'].'?\');">❌</a></td>
 			</tr>
 			<script type="text/javascript">
-				$("#titulo'.$m['id'].'").click(function(){
+				document.getElementById("titulo'.$m['id'].'").addEventListener("click", function(){
 						map.setView(L.latLng('. $m['x'].','. $m['y'].'));
 				});
 			</script>

@@ -73,9 +73,9 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 		
 		<script type='text/javascript'>
 			
-			$('#aumentar_tam').click(function(event){
+			document.getElementById('aumentar_tam').addEventListener('click', function(event){
 				event.preventDefault();
-				if(elemento === null) return;
+				if(typeof elemento === 'undefined' || elemento === null) return;
 				bounds_elem = elemento.getBounds();
 				let ancho = bounds_elem.getEast() - bounds_elem.getWest();
 				let alto = bounds_elem.getNorth() - bounds_elem.getSouth();
@@ -92,9 +92,9 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 				elemento.setBounds(nuevosBounds);
 				
 			});
-			$('#reducir_tam').click(function(event){
+			document.getElementById('reducir_tam').addEventListener('click', function(event){
 				event.preventDefault();
-				if(elemento === null) return;
+				if(typeof elemento === 'undefined' || elemento === null) return;
 				bounds_elem = elemento.getBounds();
 				let ancho = bounds_elem.getEast() - bounds_elem.getWest();
 				let alto = bounds_elem.getNorth() - bounds_elem.getSouth();
@@ -112,13 +112,13 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 				
 			});
 			
-			$('#add_elemento').click(function(event){
+			document.getElementById('add_elemento').addEventListener('click', function(event){
 				event.preventDefault();
-				if($('input[name="nombre"]').val().length<1){
+				if(document.querySelector('input[name="nombre"]').value.length < 1){
 					alert("Escribe un nombre");
 					return;
 				}
-				if(elemento === null || elemento === undefined){
+				if(typeof elemento === 'undefined' || elemento === null){
 					alert("Posiciona el elemento en el mapa primero.");
 					return;
 				}
@@ -127,24 +127,28 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 					return;
 				}
 				var bounds = elemento.getBounds();
-				$('input[name="y0"]').val(bounds.getWest());
-				$('input[name="x0"]').val(bounds.getNorth());
-				$('input[name="y1"]').val(bounds.getEast());
-				$('input[name="x1"]').val(bounds.getSouth());
-				$('input[name="icono"]').val(icono_seleccionado.replace('.png', ''));
-				$('#form_add_elemento').submit();
+				document.querySelector('input[name="y0"]').value = bounds.getWest();
+				document.querySelector('input[name="x0"]').value = bounds.getNorth();
+				document.querySelector('input[name="y1"]').value = bounds.getEast();
+				document.querySelector('input[name="x1"]').value = bounds.getSouth();
+				document.querySelector('input[name="icono"]').value = icono_seleccionado.replace('.png', '');
+				document.getElementById('form_add_elemento').submit();
 				
 			});
-			$('.imagen_elemento').click(function(){
-				$('.imagen_seleccionada').removeClass('imagen_seleccionada');
-				$(this).addClass('imagen_seleccionada');
-				icono_seleccionado = $(this).attr('data-src');
-				if(elemento != null){
-					var bounds_elem = elemento.getBounds();
-					elemento.remove();
-					elemento = L.imageOverlay('../res/items_mapa/'+icono_seleccionado, bounds_elem);
-					elemento.addTo(map);				
-				}
+			document.querySelectorAll('.imagen_elemento').forEach(function(img) {
+				img.addEventListener('click', function() {
+					document.querySelectorAll('.imagen_seleccionada').forEach(function(el) {
+						el.classList.remove('imagen_seleccionada');
+					});
+					this.classList.add('imagen_seleccionada');
+					icono_seleccionado = this.getAttribute('data-src');
+					if(typeof elemento !== 'undefined' && elemento !== null){
+						var bounds_elem = elemento.getBounds();
+						elemento.remove();
+						elemento = L.imageOverlay('../res/items_mapa/'+icono_seleccionado, bounds_elem);
+						elemento.addTo(map);				
+					}
+				});
 			});
 			var elemento;
 			var icono_seleccionado = 'transparent.png';
@@ -192,7 +196,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 					<td><a style="text-decoration:none;" href="controller\eliminar_elemento.php?id='.$e['id'].'" onclick="return confirm(\'¿Eliminar '.$e['nombre'].'?\');">❌</a></td>
 				</tr>
 				<script type="text/javascript">
-					$("#elemento'.$e['id'].'").click(function(){
+					document.getElementById("elemento'.$e['id'].'").addEventListener("click", function(){
 							map.setView(L.latLng('. ($e['x0']/2+$e['x1']/2).','. ($e['y0']/2+$e['y1']/2).'));
 					});
 				</script>
