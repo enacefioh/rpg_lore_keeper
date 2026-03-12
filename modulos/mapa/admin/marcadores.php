@@ -19,7 +19,7 @@ include 'card_mapa.php';
 <div class="card">
 	<h3 style='text-align:center;'>Añadir nuevo marcador al mapa:</h3>
 	<form id='form_add_marcador' method='post' action='controller/add_marcador.php'>
-		
+		<input type="hidden" name="mapa_id" value="<?php echo $_GET['mapa_id'] ?? 1; ?>" />
 		<input type='text' name='nombre' placeholder="Nombre del lugar" />
 		<textarea name='desc' placeholder="Descripción del lugar" ></textarea> 		
 		<input type='hidden' name='x' />
@@ -73,7 +73,8 @@ include 'card_mapa.php';
 	<h3 style='text-align:center;'>Elementos añadidos: </h3>
 	
 	<?php
-		$marcadores = enarol_mapa_get_marcadores();
+		$mapa_id = $_GET['mapa_id'] ?? 1;
+		$marcadores = enarol_mapa_get_marcadores($mapa_id);
 		echo "<table style='width:90%; margin:auto;'>
 		<thead>
 			<tr>
@@ -89,7 +90,7 @@ include 'card_mapa.php';
 				<td>[' . $m['x'].','. $m['y'].']</td>
 				<td><b>' . htmlspecialchars($m['nombre'] ?? 'Sin nombre') . '</b></td>
 				<td>' . htmlspecialchars($m['html'] ?? 'Sin descripción') . '</td>
-				<td><a style="text-decoration:none;" href="controller\eliminar_marcador.php?id='.$m['id'].'" onclick="return confirm(\'¿Eliminar marcador de '.$m['nombre'].'?\');">❌</a></td>
+				<td><a style="text-decoration:none;" href="controller/eliminar_marcador.php?id='.$m['id'].'&mapa_id='.$mapa_id.'" onclick="return confirm(\'¿Eliminar marcador de '.$m['nombre'].'?\');">❌</a></td>
 			</tr>
 			<script type="text/javascript">
 				document.getElementById("marcador'.$m['id'].'").addEventListener("click", function(){

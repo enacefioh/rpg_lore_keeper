@@ -21,6 +21,7 @@ include 'card_mapa.php';
 <div class="card">
 	<h3 style='text-align:center;'>Añadir nuevo título al mapa:</h3>
 	<form id='form_add_titulo' method='post' action='controller/add_titulo.php'>
+		<input type="hidden" name="mapa_id" value="<?php echo $_GET['mapa_id'] ?? 1; ?>" />
 		<input id='input_nombre' type='text' name='nombre' placeholder="Nombre del lugar" />
 		<table><tr>
 				
@@ -83,7 +84,8 @@ include 'card_mapa.php';
 	<h3 style='text-align:center;'>Títulos añadidos: </h3>
 	
 	<?php
-	 	$titulos = enarol_mapa_get_titulos();
+	 	$mapa_id = $_GET['mapa_id'] ?? 1;
+	 	$titulos = enarol_mapa_get_titulos($mapa_id);
 		echo "<table style='width:90%; margin:auto;'>
 		<thead>
 			<tr>
@@ -97,7 +99,7 @@ include 'card_mapa.php';
 			echo '<tr id="titulo'.$m['id'].'">
 				<td>[' . $m['x'].','. $m['y'].']</td>
 				<td><b>' . htmlspecialchars($m['nombre'] ?? 'Sin nombre') . '</b></td>
-				<td><a style="text-decoration:none;" href="controller\eliminar_titulo.php?id='.$m['id'].'" onclick="return confirm(\'¿Eliminar titulo '.$m['nombre'].'?\');">❌</a></td>
+				<td><a style="text-decoration:none;" href="controller/eliminar_titulo.php?id='.$m['id'].'&mapa_id='.$mapa_id.'" onclick="return confirm(\'¿Eliminar titulo '.$m['nombre'].'?\');">❌</a></td>
 			</tr>
 			<script type="text/javascript">
 				document.getElementById("titulo'.$m['id'].'").addEventListener("click", function(){

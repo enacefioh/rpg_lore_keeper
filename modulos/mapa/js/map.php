@@ -30,7 +30,8 @@ require '../../../config.php';
 		});
 	  
 		<?php
-			$elementos = enarol_mapa_get_elementos();
+			$mapa_id = $_GET['mapa_id'] ?? 1;
+			$elementos = enarol_mapa_get_elementos($mapa_id);
 			foreach ($elementos as $e) {
 				$x0 = $e['x0'] ?: 0;
 				$y0 = $e['y0'] ?: 0;
@@ -44,7 +45,7 @@ require '../../../config.php';
 			}
 			
 			
-			$marcadores = enarol_mapa_get_marcadores();
+			$marcadores = enarol_mapa_get_marcadores($mapa_id);
 			foreach ($marcadores as $e) {
 				$id = $e['id'] ?: 0;
 				$x = $e['x'] ?: 0;
@@ -57,7 +58,7 @@ require '../../../config.php';
 				
 			}
 			
-			$titulos = enarol_mapa_get_titulos();
+			$titulos = enarol_mapa_get_titulos($mapa_id);
 			foreach ($titulos as $t) {
 				$id = $t['id'] ?: 0;
 				$x = $t['x'] ?: 0;

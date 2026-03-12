@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
  
-if(!check_permision("diablo_oscuro_admin")){
+if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 	echo "No tienes permiso para estar aquí!";
 	exit();
 }
@@ -16,7 +16,7 @@ if(!check_permision("diablo_oscuro_admin")){
 
 
 
-<script src="../js/map.php" style='text/javascript'></script>
+<script src="../js/map.php?mapa_id=<?php echo $_GET['mapa_id'] ?? 1; ?>" type="text/javascript"></script>
 <script type='text/javascript'>
 	map.on('zoomend', function() {
 		var nivelActual = map.getZoom();

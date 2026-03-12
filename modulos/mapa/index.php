@@ -16,7 +16,7 @@
 ?>
 
 		<div id="map"></div>
-		<script src="js/map.php" style='text/javascript'></script>
+		<script src="js/map.php?mapa_id=<?php echo $_GET['mapa_id'] ?? 1; ?>" type="text/javascript"></script>
 <?php
 
 	require '../../footer.php';

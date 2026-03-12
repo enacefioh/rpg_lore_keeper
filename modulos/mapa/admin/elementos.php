@@ -42,6 +42,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 	<div class="card">
 		<h3 style='text-align:center;'>Añadir nuevo elemento al mapa:</h3>
 		<form id='form_add_elemento' method='post' action='controller/add_elemento.php'>
+			<input type="hidden" name="mapa_id" value="<?php echo $_GET['mapa_id'] ?? 1; ?>" />
 			
 			<div style=" display: flex;  flex-wrap: nowrap;  overflow-x: auto;  overflow-y: hidden;  height: 10vh;  min-height: 60px; width: 100%;  gap: 10px; ">
 				<style>
@@ -177,7 +178,8 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 		<h3 style='text-align:center;'>Elementos añadidos: </h3>
 		
 		<?php
-			$elementos = enarol_mapa_get_elementos();
+			$mapa_id = $_GET['mapa_id'] ?? 1;
+			$elementos = enarol_mapa_get_elementos($mapa_id);
 			echo "<table style='width:90%; margin:auto;'>
 			<thead>
 				<tr>
@@ -193,7 +195,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 					<td>[' . $e['x0'].'-'. $e['x1'].','. $e['y0'].'-'. $e['y1']. ']</td>
 					<td><img style="height:50px;" src="'.$URL.'modulos/mapa/res/items_mapa/' . htmlspecialchars($e['icono']) . '.png"></td>
 					<td>' . htmlspecialchars($e['nombre'] ?? 'Sin nombre') . '</td>
-					<td><a style="text-decoration:none;" href="controller\eliminar_elemento.php?id='.$e['id'].'" onclick="return confirm(\'¿Eliminar '.$e['nombre'].'?\');">❌</a></td>
+					<td><a style="text-decoration:none;" href="controller/eliminar_elemento.php?id='.$e['id'].'&mapa_id='.$mapa_id.'" onclick="return confirm(\'¿Eliminar '.$e['nombre'].'?\');">❌</a></td>
 				</tr>
 				<script type="text/javascript">
 					document.getElementById("elemento'.$e['id'].'").addEventListener("click", function(){

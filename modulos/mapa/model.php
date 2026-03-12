@@ -7,13 +7,14 @@
 	];
 }*/
 
-function enarol_mapa_get_marcadores() { //DEVUELVE LA LISTA DE TODOS LOS MARCADORES
+function enarol_mapa_get_marcadores($mapa_id) { 
     global $db_enarol;
 
     try {
-        $sql = 'SELECT * FROM marcadores_mapa;';
+        $sql = 'SELECT * FROM marcadores_mapa WHERE mapa_id = ?;';
 
-        $stmt = $db_enarol->query($sql);
+        $stmt = $db_enarol->prepare($sql);
+        $stmt->execute([$mapa_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
@@ -21,13 +22,14 @@ function enarol_mapa_get_marcadores() { //DEVUELVE LA LISTA DE TODOS LOS MARCADO
         return [];
     }
 }
-function enarol_mapa_get_titulos() { //DEVUELVE LA LISTA DE TODOS LOS MARCADORES
+function enarol_mapa_get_titulos($mapa_id) { 
     global $db_enarol;
 
     try {
-        $sql = 'SELECT * FROM titulos_mapa;';
+        $sql = 'SELECT * FROM titulos_mapa WHERE mapa_id = ?;';
 
-        $stmt = $db_enarol->query($sql);
+        $stmt = $db_enarol->prepare($sql);
+        $stmt->execute([$mapa_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
@@ -35,13 +37,14 @@ function enarol_mapa_get_titulos() { //DEVUELVE LA LISTA DE TODOS LOS MARCADORES
         return [];
     }
 }
-function enarol_mapa_get_elementos() { //DEVUELVE LA LISTA DE TODOS LOS ELEMENTOS
+function enarol_mapa_get_elementos($mapa_id) { 
     global $db_enarol;
 
     try {
-        $sql = 'SELECT * FROM elementos_mapa;';
+        $sql = 'SELECT * FROM elementos_mapa WHERE mapa_id = ?;';
 
-        $stmt = $db_enarol->query($sql);
+        $stmt = $db_enarol->prepare($sql);
+        $stmt->execute([$mapa_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
@@ -50,15 +53,15 @@ function enarol_mapa_get_elementos() { //DEVUELVE LA LISTA DE TODOS LOS ELEMENTO
     }
 }
 
-function enarol_mapa_add_elemento($nombre, $x0, $y0, $x1, $y1, $icono){
+function enarol_mapa_add_elemento($mapa_id, $nombre, $x0, $y0, $x1, $y1, $icono){
 	 global $db_enarol;
 
     try {
         // 1. Preparar la inserción
-        $stmt = $db_enarol->prepare('INSERT INTO elementos_mapa (x0, y0, x1, y1 , nombre, icono) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt = $db_enarol->prepare('INSERT INTO elementos_mapa (mapa_id, x0, y0, x1, y1 , nombre, icono) VALUES (?, ?, ?, ?, ?, ?, ?)');
         
         // 2. Ejecutar
-        $stmt->execute([$x0, $y0, $x1, $y1, $nombre, $icono]);
+        $stmt->execute([$mapa_id, $x0, $y0, $x1, $y1, $nombre, $icono]);
 
         return ['success' => true, 'id' => $db_enarol->lastInsertId()];
 
@@ -67,15 +70,15 @@ function enarol_mapa_add_elemento($nombre, $x0, $y0, $x1, $y1, $icono){
         return ['success' => false, 'error' => $e->getMessage()];
     }
 }
-function enarol_mapa_add_marcador($nombre, $desc, $x, $y){
+function enarol_mapa_add_marcador($mapa_id, $nombre, $desc, $x, $y){
 	 global $db_enarol;
 
     try {
         // 1. Preparar la inserción
-        $stmt = $db_enarol->prepare('INSERT INTO marcadores_mapa (x, y, nombre, html) VALUES (?, ?, ?, ?)');
+        $stmt = $db_enarol->prepare('INSERT INTO marcadores_mapa (mapa_id, x, y, nombre, html) VALUES (?, ?, ?, ?, ?)');
         
         // 2. Ejecutar
-        $stmt->execute([$x, $y, $nombre, $desc]);
+        $stmt->execute([$mapa_id, $x, $y, $nombre, $desc]);
 
         return ['success' => true, 'id' => $db_enarol->lastInsertId()];
 
@@ -84,15 +87,15 @@ function enarol_mapa_add_marcador($nombre, $desc, $x, $y){
         return ['success' => false, 'error' => $e->getMessage()];
     }
 }
-function enarol_mapa_add_titulo($nombre, $zmin, $zmax, $tam, $x, $y){
+function enarol_mapa_add_titulo($mapa_id, $nombre, $zmin, $zmax, $tam, $x, $y){
 	 global $db_enarol;
 
     try {
         // 1. Preparar la inserción
-        $stmt = $db_enarol->prepare('INSERT INTO titulos_mapa (x,y,zmin,zmax,nombre,tam) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt = $db_enarol->prepare('INSERT INTO titulos_mapa (mapa_id, x,y,zmin,zmax,nombre,tam) VALUES (?, ?, ?, ?, ?, ?, ?)');
         
         // 2. Ejecutar
-        $stmt->execute([$x, $y, $zmin, $zmax, $nombre, $tam]);
+        $stmt->execute([$mapa_id, $x, $y, $zmin, $zmax, $nombre, $tam]);
 
         return ['success' => true, 'id' => $db_enarol->lastInsertId()];
 
