@@ -1,0 +1,162 @@
+body { 
+	margin: 0;
+	padding: 0;
+	background: #222;
+	color: white;
+	font-family: 'EB Garamond', serif;
+    font-size: 18px; /* Las fuentes antiguas suelen leerse mejor un poco más grandes */
+}
+
+h1 { 
+	text-align: center;
+	margin: 10px; 
+}
+
+
+
+/* Títulos de personajes y regiones (Toque D&D) */
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Botón flotante */
+#menu-icon {
+    position: fixed;
+    top: 1vh;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    z-index: 2000; /* Por encima del mapa de Leaflet */
+    cursor: pointer;
+    background: rgba(40, 40, 40, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#menu-icon span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: #e0e0e0;
+    border-radius: 9px;
+    transition: 0.3s;
+}
+
+/* Menú Lateral */
+#side-menu {
+    position: fixed;
+    right: -300px; /* Escondido por defecto */
+    top: 0;
+    width: 280px;
+    height: 100%;
+    background: #1e1e1e;
+    z-index: 1999;
+    transition: 0.4s;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    padding-top: 80px;
+    color: white;
+}
+
+#side-menu.active {
+    right: 0; /* Aparece al activarse */
+}
+
+/* Enlaces del menú */
+#side-menu nav a {
+    display: block;
+    padding: 15px 25px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 18px;
+    border-bottom: 1px solid #333;
+    transition: 0.3s;
+}
+
+#side-menu nav a:hover {
+    background: #333;
+    color: #fff;
+    padding-left: 35px;
+}
+
+.menu-header {
+    padding: 0 25px;
+    color: #d4af37; /* Color dorado para el título */
+}
+
+/* Capa oscura de fondo */
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1998;
+}
+
+#overlay.active {
+    display: block;
+}
+
+/* El fondo oscuro que cubre la pantalla */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 3000; /* Por encima de Leaflet y del Menú */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    backdrop-filter: blur(3px); /* Difumina un poco el fondo */
+}
+
+/* La caja del contenido */
+.modal-content {
+    background-color: #2c2c2c;
+    margin: 10% auto;
+    padding: 25px;
+    border: 2px solid #d4af37; /* Borde dorado */
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    color: #e0e0e0;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+}
+
+/* Botón de cerrar (X) */
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #d4af37;
+}
+
+/* Estilo para imágenes dentro del popup */
+#popup-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.item_menu{
+	font-family: 'Cinzel', serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+	font-size: 26px;
+}

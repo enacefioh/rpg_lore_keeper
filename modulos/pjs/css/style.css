@@ -1,0 +1,99 @@
+#wrapper-pjs {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #1a1a1a;
+	color: 
+}
+
+#carrusel-pjs {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    height: 100%;
+    /* Ocultar scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+#carrusel-pjs::-webkit-scrollbar { display: none; }
+
+.pj-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    background: #f4eeda;
+}
+
+.pj-foto-wrapper {
+    flex: 0 0 50%; 
+    position: relative; /* Importante para que el hijo se posicione respecto a este */
+    overflow: hidden;
+    height: 50%; /* En móvil, la mitad superior */
+}
+
+.pj-header {
+    position: absolute; /* Flota sobre la imagen */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* Gradiente para que el texto blanco se lea bien sobre cualquier foto */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+    color: #f4eeda;
+    padding: 20px;
+    z-index: 5;
+    text-align: center;
+}
+
+.pj-header h2 {
+    margin-bottom: 35px;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+	text-shadow: 2px 2px 1px #000;
+}
+
+.pj-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* LLena todo el espacio recortando si es necesario */
+    object-position: center top; /* Prioriza ver la cara del PJ */
+}
+
+/* Botones laterales (Ocultos en móvil) */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 20px 15px;
+    cursor: pointer;
+    z-index: 10;
+    display: none; /* Se activa en media query */
+    transition: background 0.3s;
+}
+.nav-btn:hover { background: rgba(0,0,0,0.8); }
+.prev { left: 0; border-radius: 0 5px 5px 0; }
+.next { right: 0; border-radius: 5px 0 0 5px; }
+
+/* Escritorio */
+@media (min-width: 768px) {
+    .pj-card { flex-direction: row; }
+    .pj-foto-wrapper, .pj-info { flex: 0 0 50%; height: 100%; }
+    .nav-btn { display: block; } /* Mostrar botones en PC */
+	.pj-info { font-size: 25px; }
+}
+
+.pj-info {
+    padding: 30px;
+	box-sizing: border-box;
+    overflow-y: auto; 
+    background: #f4eeda;
+	font-style: italic; 
+	color: #5d3a1a; 
+	margin-bottom: 15px;
+	min-height: 50vh;
+}

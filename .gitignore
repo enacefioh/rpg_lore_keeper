@@ -1,0 +1,20 @@
+# Configuración específica del entorno
+config.php
+
+# Base de datos SQLite
+*.sqlite
+*.db
+
+# Sistema Operativo y Editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Sistema de logs de PHP (si los hubiera en el futuro)
+error_log
+*.log
+
+# Entorno local Login
+.login/
+login.php
