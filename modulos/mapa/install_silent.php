@@ -62,8 +62,8 @@ try {
     $stmt->execute(["module_" . $mod_folder . "_installed", "1"]);
     
     // Crear el mapa principal de "Terragon por defecto" (Migración de datos a nueva BBDD si viene desde cero)
-    $stmt_mapa = $db_enarol->prepare("INSERT INTO mapas (id, nombre, img, ancho, alto) VALUES (1, 'Mapa Principal', 'mapa.jpg', 3000, 3000)");
-    $stmt_mapa->execute();
+    // $stmt_mapa = $db_enarol->prepare("INSERT INTO mapas (id, nombre, img, ancho, alto) VALUES (1, 'Mapa Principal', 'mapa.jpg', 3000, 3000)");
+   // $stmt_mapa->execute();
 
 } catch (PDOException $e) {
 	// Fallo silencioso en log (El framework luego manejará mejor los logs)

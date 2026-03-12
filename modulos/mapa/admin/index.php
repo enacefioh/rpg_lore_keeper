@@ -51,9 +51,9 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
         <input type="text" name="nombre" placeholder="Ej: Las Catacumbas" required style="width:100%; margin-bottom: 15px;">
         
         <label>Archivo de Imagen (JPG/PNG):</label>
-        <input type="text" name="img" placeholder="imagen.jpg (Debe estar en modulos/mapa/res/)" required style="width:100%; margin-bottom: 15px;">
+        <input type="file" name="mapa_img" accept="image/jpeg,image/png" required style="width:100%; margin-bottom: 15px;">
         
-        <p style="font-size: 0.8em; color: #888; margin-bottom: 15px;">* De momento, sube la imagen manualmente a la carpeta <code>res/</code> y escribe aquí su nombre.</p>
+        <p style="font-size: 0.8em; color: #888; margin-bottom: 15px;">* La imagen se subirá y procesará automáticamente para calcular sus dimensiones.</p>
         
         <div style="display: flex; gap: 10px;">
             <input type="submit" value="Crear Mapa" style="flex: 1;">
@@ -64,5 +64,5 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 
 <?php
 }
-include '../../../admin/header.php';
+include '../../../admin/footer.php';
 ?>
