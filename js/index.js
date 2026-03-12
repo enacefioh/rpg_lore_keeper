@@ -1,5 +1,3 @@
-window.$ = window.jQuery = jQuery;
-
 function toggleMenu() {
     document.getElementById("side-menu").classList.toggle("active");
     document.getElementById("overlay").classList.toggle("active");
@@ -53,11 +51,13 @@ window.onclick = function(event) {
     }
 }
 
-$(document).ready(function(){
-	$('#personajes').click( 
-	function(){ 
-		toggleMenu()
-		openPopupFile('personajes');
-	});
-	
+document.addEventListener('DOMContentLoaded', () => {
+    const btnPersonajes = document.getElementById('personajes');
+    if (btnPersonajes) {
+        btnPersonajes.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleMenu();
+            openPopupFile('personajes');
+        });
+    }
 });

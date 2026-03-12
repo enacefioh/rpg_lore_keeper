@@ -100,7 +100,6 @@ error_reporting(E_ALL);
         </style>
 		
 		<link rel="stylesheet" href="../css/leaflet.css" />
-		<script src="../js/jquery.js" style='text/javascript'></script>
 		<script src="../js/leaflet.js"></script>
 		<script src="../js/index.js" style='text/javascript'></script>
     </head>

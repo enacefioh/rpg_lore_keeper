@@ -1,11 +1,11 @@
-</div>
+</main>
 	<div id="menu-icon" onclick="toggleMenu()">
 		<span></span>
 		<span></span>
 		<span></span>
 	</div>
 
-	<div id="side-menu">
+	<aside id="side-menu">
 		<div class="menu-header">
 			<h2>Menú</h2>
 		</div>
@@ -26,17 +26,17 @@
 			
 			?>
 		</nav>
-	</div>
+	</aside>
 
 	<div id="overlay" onclick="toggleMenu()"></div>
 	
-	<div id="custom-popup" class="modal">
+	<dialog id="custom-popup" class="modal">
 		<div class="modal-content">
 			<span class="close-button" onclick="closePopup()">&times;</span>
 			<div id="popup-body">
 				</div>
 		</div>
-	</div>
+	</dialog>
 
     
 </body>
