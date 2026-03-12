@@ -152,9 +152,37 @@ function enarol_mapa_eliminar_titulo($id){
         return ['success' => false];
     }
 }
+function enarol_mapa_get_mapas() {
+    global $db_enarol;
+    try {
+        $sql = 'SELECT * FROM mapas;';
+        $stmt = $db_enarol->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        error_log($e->getMessage());
+        return [];
+    }
+}
 
+function enarol_mapa_get_mapa($id) {
+    global $db_enarol;
+    try {
+        $stmt = $db_enarol->prepare('SELECT * FROM mapas WHERE id = ?');
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return null;
+    }
+}
 
-
-
-
+function enarol_mapa_add_mapa($nombre, $img, $ancho = 3000, $alto = 3000) {
+    global $db_enarol;
+    try {
+        $stmt = $db_enarol->prepare('INSERT INTO mapas (nombre, img, ancho, alto) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$nombre, $img, $ancho, $alto]);
+        return ['success' => true, 'id' => $db_enarol->lastInsertId()];
+    } catch (PDOException $e) {
+        return ['success' => false, 'error' => $e->getMessage()];
+    }
+}
 ?>

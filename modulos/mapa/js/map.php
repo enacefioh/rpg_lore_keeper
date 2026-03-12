@@ -12,8 +12,15 @@ require '../../../config.php';
         });
 
         // 3. Define el tamaño de tu imagen y la ruta
-        var bounds = [[0, 0], [<?php echo $MAPA_WIDTH; ?>, <?php echo $MAPA_HEIGHT; ?>]]; // [Alto, Ancho] en píxeles
-        var image = L.imageOverlay('<?php echo $URL;?>modulos/mapa/res/mapa.jpg', bounds).addTo(map); // 'mapa.jpg' es tu archivo
+        <?php 
+            $mapa_id = $_GET['mapa_id'] ?? 1;
+            $info_mapa = enarol_mapa_get_mapa($mapa_id);
+            $ancho = $info_mapa['ancho'] ?? 3000;
+            $alto = $info_mapa['alto'] ?? 3000;
+            $img_file = $info_mapa['img'] ?? 'mapa.jpg';
+        ?>
+        var bounds = [[0, 0], [<?php echo $alto; ?>, <?php echo $ancho; ?>]]; // [Alto, Ancho] en píxeles
+        var image = L.imageOverlay('<?php echo $URL;?>modulos/mapa/res/<?php echo $img_file; ?>', bounds).addTo(map); 
 
         // Centrar el mapa en la imagen
         map.fitBounds(bounds);
@@ -30,7 +37,6 @@ require '../../../config.php';
 		});
 	  
 		<?php
-			$mapa_id = $_GET['mapa_id'] ?? 1;
 			$elementos = enarol_mapa_get_elementos($mapa_id);
 			foreach ($elementos as $e) {
 				$x0 = $e['x0'] ?: 0;
