@@ -15,7 +15,9 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Rutas base (Asegúrate de que acaban en barra '/')
-$URL = "http://localhost:8000/"; 
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
+$host = $_SERVER['HTTP_HOST'] ?? 'localhost:8000';
+$URL = $protocol . "://" . $host . "/";
 $SLUG_UNICO_PARTIDA = "terragon";
 
 // Rutas físicas en el servidor

@@ -29,20 +29,20 @@ include 'card_mapa.php';
 	
 	<script type='text/javascript'>
 		
-		$('#add_marcador').click(function(event){
+		document.getElementById('add_marcador').addEventListener('click', function(event){
 			event.preventDefault();
-			if($('input[name="nombre"]').val().length<1){
+			if(document.querySelector('input[name="nombre"]').value.length < 1){
 				alert("Escribe un nombre");
 				return;
 			}
-			if(marcador === undefined){
+			if(typeof marcador === 'undefined' || marcador === null){
 				alert("Posiciona el marcador en el mapa primero.");
 				return;
 			}
 			var pos = marcador.getLatLng();
-			$('input[name="x"]').val(pos.lat);
-			$('input[name="y"]').val(pos.lng);
-			$('#form_add_marcador').submit();
+			document.querySelector('input[name="x"]').value = pos.lat;
+			document.querySelector('input[name="y"]').value = pos.lng;
+			document.getElementById('form_add_marcador').submit();
 			
 		});
 		
@@ -92,7 +92,7 @@ include 'card_mapa.php';
 				<td><a style="text-decoration:none;" href="controller\eliminar_marcador.php?id='.$m['id'].'" onclick="return confirm(\'¿Eliminar marcador de '.$m['nombre'].'?\');">❌</a></td>
 			</tr>
 			<script type="text/javascript">
-				$("#marcador'.$m['id'].'").click(function(){
+				document.getElementById("marcador'.$m['id'].'").addEventListener("click", function(){
 						map.setView(L.latLng('. $m['x'].','. $m['y'].'));
 				});
 			</script>
