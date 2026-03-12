@@ -18,6 +18,9 @@ require '../../../config.php';
             $ancho = $info_mapa['ancho'] ?? 3000;
             $alto = $info_mapa['alto'] ?? 3000;
             $img_file = $info_mapa['img'] ?? 'mapa.jpg';
+            $zoom = $info_mapa['zoom_inicial'] ?? 0;
+            $lat = $info_mapa['lat_inicial'] ?? 1500;
+            $lng = $info_mapa['lng_inicial'] ?? 1500;
         ?>
         var bounds = [[0, 0], [<?php echo $alto; ?>, <?php echo $ancho; ?>]]; // [Alto, Ancho] en píxeles
         var image = L.imageOverlay('<?php echo $URL;?>modulos/mapa/res/<?php echo $img_file; ?>', bounds).addTo(map); 
