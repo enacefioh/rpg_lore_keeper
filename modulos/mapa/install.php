@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 
 require_once $ENA_LOGIN_PATH;
 
-if(!check_permision("diablo_oscuro_admin")){
+if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 	echo "No tienes permiso para estar aquí!";
 	exit();
 }
