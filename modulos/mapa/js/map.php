@@ -90,7 +90,7 @@ require '../../../config.php';
 
 		// Añadirlo al mapa
 	
-		map.setView([1852,1558], 0);
+		map.setView([<?php echo $lat; ?>, <?php echo $lng; ?>], <?php echo $zoom; ?>);
         // Tip: Haz clic en el mapa para ver las coordenadas en la consola y saber dónde poner los puntos
         map.on('click', function(e) {
             console.log("Coordenadas: " + e.latlng.toString());

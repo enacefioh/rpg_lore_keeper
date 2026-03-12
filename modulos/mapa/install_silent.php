@@ -10,6 +10,9 @@ try {
 			"img"	TEXT NOT NULL,
 			"ancho"	INTEGER DEFAULT 3000,
 			"alto"	INTEGER DEFAULT 3000,
+            "zoom_inicial" INTEGER DEFAULT 0,
+            "lat_inicial" REAL DEFAULT 1500,
+            "lng_inicial" REAL DEFAULT 1500,
 			PRIMARY KEY("id")
 		)',
 		'CREATE TABLE IF NOT EXISTS "elementos_mapa" (

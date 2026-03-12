@@ -28,6 +28,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
                 <a href="marcadores.php?mapa_id=<?php echo $m['id']; ?>" class="button" style="text-align:center; background: var(--accent-gold); color: #000; text-decoration: none; padding: 8px; border-radius: 4px;">Marcadores</a>
                 <a href="titulos.php?mapa_id=<?php echo $m['id']; ?>" class="button" style="text-align:center; background: var(--accent-gold); color: #000; text-decoration: none; padding: 8px; border-radius: 4px;">Títulos</a>
                 <a href="elementos.php?mapa_id=<?php echo $m['id']; ?>" class="button" style="text-align:center; background: var(--accent-gold); color: #000; text-decoration: none; padding: 8px; border-radius: 4px;">Elementos</a>
+                <a href="configurar.php?mapa_id=<?php echo $m['id']; ?>" class="button" style="text-align:center; background: #3498db; color: white; text-decoration: none; padding: 8px; border-radius: 4px;">Configurar ⚙️</a>
                 <a href="../index.php?mapa_id=<?php echo $m['id']; ?>" target="_blank" style="text-align:center; font-size: 0.8em; color: var(--accent-gold); margin-top: 5px;">👁️ Ver en vivo</a>
             </div>
         </div>

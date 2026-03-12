@@ -175,12 +175,23 @@ function enarol_mapa_get_mapa($id) {
     }
 }
 
-function enarol_mapa_add_mapa($nombre, $img, $ancho = 3000, $alto = 3000) {
+function enarol_mapa_add_mapa($nombre, $img, $ancho = 3000, $alto = 3000, $zoom = 0, $lat = 1500, $lng = 1500) {
     global $db_enarol;
     try {
-        $stmt = $db_enarol->prepare('INSERT INTO mapas (nombre, img, ancho, alto) VALUES (?, ?, ?, ?)');
-        $stmt->execute([$nombre, $img, $ancho, $alto]);
+        $stmt = $db_enarol->prepare('INSERT INTO mapas (nombre, img, ancho, alto, zoom_inicial, lat_inicial, lng_inicial) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$nombre, $img, $ancho, $alto, $zoom, $lat, $lng]);
         return ['success' => true, 'id' => $db_enarol->lastInsertId()];
+    } catch (PDOException $e) {
+        return ['success' => false, 'error' => $e->getMessage()];
+    }
+}
+
+function enarol_mapa_update_mapa($id, $nombre, $img, $ancho, $alto, $zoom, $lat, $lng) {
+    global $db_enarol;
+    try {
+        $stmt = $db_enarol->prepare('UPDATE mapas SET nombre = ?, img = ?, ancho = ?, alto = ?, zoom_inicial = ?, lat_inicial = ?, lng_inicial = ? WHERE id = ?');
+        $stmt->execute([$nombre, $img, $ancho, $alto, $zoom, $lat, $lng, $id]);
+        return ['success' => true];
     } catch (PDOException $e) {
         return ['success' => false, 'error' => $e->getMessage()];
     }

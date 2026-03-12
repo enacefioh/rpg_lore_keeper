@@ -107,6 +107,7 @@ error_reporting(E_ALL);
     <header>Administrador de configuración</header>
     <div class='container'>
         <nav>
+            <a href='<?php echo $URL;?>admin/settings.php' style="background: #1a252f; font-weight: bold;">⚙️ Ajustes Generales</a>
 		
 			<?php
 				$mods = glob(__DIR__ .'/../modulos/*', GLOB_ONLYDIR);
