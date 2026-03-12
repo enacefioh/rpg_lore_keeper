@@ -101,7 +101,6 @@ error_reporting(E_ALL);
 		
 		<link rel="stylesheet" href="../css/leaflet.css" />
 		<script src="../js/leaflet.js"></script>
-		<script src="../js/index.js" style='text/javascript'></script>
     </head>
     <body>
 

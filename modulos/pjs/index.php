@@ -34,7 +34,7 @@
                 <div class="pj-trasfondo">
                     <?php echo $pj['texto']; ?>
 					<?php
-						if($pj['usuario'] == $_SESSION['user_id']){
+						if(isset($pj['usuario']) && isset($_SESSION['user_id']) && $pj['usuario'] == $_SESSION['user_id']){
 							echo "<div style='text-align:right; padding: 25px;'><i><a href='admin/personaje_editar.php?id=".$pj['id']."' style='text-decoration:none;'>✍️ Editar</a></i></div>";
 						}
 					?>
