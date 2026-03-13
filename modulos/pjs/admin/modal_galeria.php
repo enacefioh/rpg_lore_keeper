@@ -21,7 +21,7 @@ sort($all_tags);
         <div class="modal-body">
             <!-- Pestañas o Secciones -->
             <div class="gallery-tabs">
-                <button class="tab-btn active" onclick="switchTab('library')">Librería Profesional</button>
+                <button class="tab-btn active" onclick="switchTab('library')">Librería</button>
                 <button class="tab-btn" onclick="switchTab('upload')">Subir propia imagen</button>
             </div>
 
