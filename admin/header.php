@@ -98,9 +98,6 @@ error_reporting(E_ALL);
 				border-bottom: 2px solid #8BABB7;
 			}
         </style>
-		
-		<link rel="stylesheet" href="../css/leaflet.css" />
-		<script src="../js/leaflet.js"></script>
     </head>
     <body>
 

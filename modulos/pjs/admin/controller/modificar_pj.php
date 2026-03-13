@@ -16,29 +16,30 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin") && $pj['usuario'] != $_SESSION
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     // 2. Recoger datos del formulario
-    $id = $_POST['id'] ?? 0;
-    $nombre = $_POST['nombre'] ?? 'Sin nombre';
-    $usuario_id = $_POST['user'] ?? -1;
     $descripcion = $_POST['desc'] ?? '';
     $trasfondo = $_POST['html'] ?? '';
+    $nombre_imagen = $_POST['img'] ?? $pj['img']; 
+    $img_type = $_POST['img_type'] ?? 'library';
 
+    // Si es de la librería, la copiamos a uploads para que sea independiente
+    if ($img_type == 'library' && $nombre_imagen != $pj['img']) {
+        $source = __DIR__ . '/../../res/pjs_img_library/' . $nombre_imagen;
+        $file_new_name = time() . "_ref_" . $nombre_imagen;
+        if (file_exists($source)) {
+            copy($source, '../../uploads/' . $file_new_name);
+            $nombre_imagen = $file_new_name;
+        }
+    }
 
     // 4. Llamar a tu función del modelo
-    $resultado = enarol_pjs_modificar_pj($id, $nombre, $usuario_id, $descripcion, $trasfondo);
+    $resultado = enarol_pjs_modificar_pj($id, $nombre, $usuario_id, $descripcion, $trasfondo, $nombre_imagen);
 
     // 5. Redirección o respuesta
     if ($resultado) {
-        // Éxito: volvemos a la página del mapa o lista de pjs
         header("Location: ../personaje_editar.php?id=$id&success=PJ%20Modificado!");
     } else {
-        // Error
         header("Location: ../personaje_editar.php?id=$id&error=PJ%20NO%20Modificado!");
     }
     exit;
 }
-
-
-
-;
-
 ?>

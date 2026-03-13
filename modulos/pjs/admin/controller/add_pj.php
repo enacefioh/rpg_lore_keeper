@@ -18,70 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario_id = $_POST['user'] ?? null;
     $descripcion = $_POST['desc'] ?? '';
     $trasfondo = $_POST['html'] ?? '';
-    $nombre_imagen = null;
+    $nombre_imagen = $_POST['gallery_img'] ?? 'default.jpg';
+    $img_type = $_POST['img_type'] ?? 'library';
 
-    // 3. Gestión de la imagen (Upload)
-    if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-        $ruta_destino = '../uploads/'; // Asegúrate de que esta carpeta exista y tenga permisos
-        
-        // Limpiamos el nombre del archivo para evitar problemas
-        $extension = pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION);
-        $nombre_imagen = time() . "_" . preg_replace("/[^a-zA-Z0-9]/", "", $nombre) . "." . $extension;
-        
-        if (isset($_FILES['img']) && $_FILES['img']['error'] === UPLOAD_ERR_OK) {
-			$ruta_destino = '../../uploads/';
-			$tmp_name = $_FILES['img']['tmp_name'];
-			$extension = strtolower(pathinfo($_FILES['img']['name'], PATHINFO_EXTENSION));
-			$nombre_imagen = time() . "_" . preg_replace("/[^a-zA-Z0-9]/", "", $nombre) . "." . $extension;
-
-			// 1. Obtener dimensiones actuales
-			list($ancho_orig, $alto_orig) = getimagesize($tmp_name);
-			$max_dim = 1000;
-
-			if ($ancho_orig > $max_dim || $alto_orig > $max_dim) {
-				// 2. Calcular nuevas dimensiones manteniendo la proporción
-				$ratio = $ancho_orig / $alto_orig;
-				if ($ratio > 1) {
-					$nuevo_ancho = $max_dim;
-					$nuevo_alto = $max_dim / $ratio;
-				} else {
-					$nuevo_alto = $max_dim;
-					$nuevo_ancho = $max_dim * $ratio;
-				}
-
-				// 3. Crear lienzo y redimensionar según formato
-				$lienzo = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
-				
-				// Cargar imagen origen según extensión
-				if ($extension == 'png') {
-					$origen = imagecreatefrompng($tmp_name);
-					// Mantener transparencia del PNG
-					imagealphablending($lienzo, false);
-					imagesavealpha($lienzo, true);
-				} else {
-					$origen = imagecreatefromjpeg($tmp_name);
-				}
-
-				imagecopyresampled($lienzo, $origen, 0, 0, 0, 0, $nuevo_ancho, $nuevo_alto, $ancho_orig, $alto_orig);
-
-				// 4. Guardar imagen procesada
-				if ($extension == 'png') {
-					imagepng($lienzo, $ruta_destino . $nombre_imagen);
-				} else {
-					imagejpeg($lienzo, $ruta_destino . $nombre_imagen, 85); // 85 es calidad
-				}
-				
-				imagedestroy($lienzo);
-				imagedestroy($origen);
-			} else {
-				// Si es pequeña, mover directamente
-				move_uploaded_file($tmp_name, $ruta_destino . $nombre_imagen);
-			}
-		}
+    // Si es de la librería, la copiamos a uploads para que sea independiente
+    if ($img_type == 'library') {
+        $source = __DIR__ . '/../../res/pjs_img_library/' . $nombre_imagen;
+        $file_new_name = time() . "_ref_" . $nombre_imagen;
+        if (file_exists($source)) {
+            copy($source, '../../uploads/' . $file_new_name);
+            $nombre_imagen = $file_new_name;
+        }
     }
 
     // 4. Llamar a tu función del modelo
-    // Asumo el orden de tus parámetros: add_pj($nombre, $usuario_id, $desc, $trasfondo, $img)
     $resultado = enarol_pjs_add_pj($nombre, $usuario_id, $descripcion, $trasfondo, $nombre_imagen);
 
     // 5. Redirección o respuesta

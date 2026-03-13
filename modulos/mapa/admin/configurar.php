@@ -16,6 +16,8 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
         echo "<div class='card'>Mapa no encontrado.</div>";
     } else {
 ?>
+<link rel="stylesheet" href="<?php echo $URL; ?>/modulos/mapa/css/leaflet.css" />
+<script src="<?php echo $URL; ?>/modulos/mapa/js/leaflet.js"></script>
 <div class="card">
     <h2 style="text-align:center;">Configuración de Mapa: <?php echo htmlspecialchars($m['nombre']); ?></h2>
     

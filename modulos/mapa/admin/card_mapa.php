@@ -9,6 +9,8 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
 }
 ?>
 
+<link rel="stylesheet" href="<?php echo $URL; ?>css/leaflet.css" />
+<script src="<?php echo $URL; ?>js/leaflet.js"></script>
 <div class="card">
 	<div id="map" style='width:100%; min-height: 40vh;'></div>
 	<span id='info_zoom' >Zoom: 0</span>
