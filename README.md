@@ -1,36 +1,43 @@
-# RPG Lore Keeper - Compendio de Rol Modular
+# Terragon - Compendio de Rol Modular
 
-RPG Lore Keeper es un CMS ligero, rápido y modular escrito en PHP nativo orientado a servir de apoyo interactivo para campañas de juegos de rol de fantasía. 
+Terragon es un CMS ligero, rápido y modular escrito en PHP nativo orientado a servir de apoyo interactivo para campañas de juegos de rol de fantasía. 
 
 ## Funcionalidades principales
 
-- **Mapa Interactivo:** Motor cartográfico basado en mapa libre con puntos de interés y marcadores.
-- **Sistema de Módulos (Plug&Play):** Añade extensiones y utilidades simplemente arrastrando carpetas en `/modulos/`.
-- **Cero dependencias pesadas:** Construido con Vanilla JS y CSS flexbox, sin jQuery.
-- **Base de Datos embebida:** Utiliza SQLite nativo sin necesidad de conectarse a motores SQL externos.
+- **Arquitectura Profesional:** Estructura con carpeta pública (`public/`) para una seguridad de nivel profesional.
+- **Mapa Interactivo:** Motor cartográfico basado en Leaflet con puntos de interés, títulos y elementos dinámicos.
+- **Sistema de Módulos (Plug&Play):** Añade extensiones simplemente arrastrando carpetas en `/public/modulos/`.
+- **Ingeniería de Calidad:** Batería de tests unitarios e integración incluidos con PHPUnit.
+- **Cero Dependencias en Producción:** Todo el frontend corre con Vanilla JS y CSS flexbox.
+- **Base de Datos embebida:** Utiliza SQLite nativo sin necesidad de servidores externos.
 
-## Instalación en 3 Pasos 🚀
+## Instalación en Producción 🚀
 
-El entorno está preparado para ejecutarse rápidamente desde cualquier servidor básico de PHP.
+1. **Clona el repositorio** en tu servidor.
+2. **Configura el Web Root:** Es un paso crítico. Debes apuntar la raíz de tu dominio a la carpeta `public/`.
+3. **Configura la App:** Duplica `public/config.example.php` a `public/config.php` y ajusta tus URL.
 
-1. **Clona el repositorio** o sube los archivos a la carpeta pública de tu servidor.
-2. **Duplica el `config.example.php`** y renómbralo a `config.php`. Ajusta las URL principales usando tu dominio (o `localhost`).
-3. **Servidor Local (Para Desarrollo):**
-   Si deseas probar el proyecto en tu ordenador sin configurar XAMPP, abre tu terminal en el directorio del proyecto y ejecuta:
+## Guía de Desarrollo y Calidad 🛠️
+
+Si quieres ampliar Terragon o ejecutar las pruebas automatizadas, necesitas **Composer**.
+
+1. **Instalar Dependencias de Desarrollo:** 
    ```bash
-   php -S 0.0.0.0:8000
+   composer install
    ```
-   *(Esto hará la web accesible desde tu ordenador en `http://localhost:8000` y desde tu móvil usando tu IP local `http://192.168.1.x:8000`)*
+2. **Servidor Local Profesional:**
+   Para que las rutas funcionen igual que en producción, ejecuta el servidor apuntando a `public`:
+   ```bash
+   php -S localhost:8000 -t public
+   ```
+3. **Ejecutar Tests Automatizados:**
+   Usa PHPUnit para verificar que los cambios no han roto nada:
+   ```bash
+   ./vendor/bin/phpunit
+   ```
 
-## Desarrollo de Módulos
-Terragon detecta automáticamente los módulos dentro de la carpeta `/modulos/`. 
-
-Para crear un módulo nuevo, crea una carpeta y añade en su interior un archivo llamado `info.php` que devuelva un array con su nombre e icono. Automáticamente se unirá al menú de navegación principal.
-```php
-<?php
-// Ejemplo info.php
-return [
-    'nombre' => 'Diario',
-    'icono'  => '📖'
-];
-```
+## Estructura del Proyecto
+- `public/`: Única carpeta accesible desde internet. Contiene scripts, estilos e imágenes.
+- `core/`: Motor interno del sistema (Base de datos y cargador). Protegido.
+- `tests/`: Batería de pruebas automatizadas.
+- `vendor/`: Librerías instaladas por Composer (no se suben a Git).
