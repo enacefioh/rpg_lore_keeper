@@ -1,6 +1,6 @@
-# Terragon - Compendio de Rol Modular
+# RPG Lore Keeper - Compendio de Rol Modular
 
-Terragon es un CMS ligero, rápido y modular escrito en PHP nativo orientado a servir de apoyo interactivo para campañas de juegos de rol de fantasía. 
+RPG Lore Keeper es un CMS ligero, rápido y modular escrito en PHP nativo orientado a servir de apoyo interactivo para campañas de juegos de rol de fantasía. 
 
 ## Funcionalidades principales
 

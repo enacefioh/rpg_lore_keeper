@@ -18,3 +18,7 @@ error_log
 # Entorno local Login
 .login/
 login.php
+
+# Dependencias y Testing
+vendor/
+.phpunit.cache/
