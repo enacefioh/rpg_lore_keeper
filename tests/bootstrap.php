@@ -6,7 +6,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $DATABASE_PATH = ':memory:';
 
 // Cargamos el motor de la base de datos
-require_once __DIR__ . '/../core/db.php';
+require_once __DIR__ . '/../public/core/db.php';
 global $db_enarol;
 $db_enarol = conectar_bd($DATABASE_PATH);
 

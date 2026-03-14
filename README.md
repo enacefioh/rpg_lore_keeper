@@ -37,7 +37,7 @@ Si quieres ampliar Terragon o ejecutar las pruebas automatizadas, necesitas **Co
    ```
 
 ## Estructura del Proyecto
-- `public/`: Única carpeta accesible desde internet. Contiene scripts, estilos e imágenes.
-- `core/`: Motor interno del sistema (Base de datos y cargador). Protegido.
+- `public/`: Única carpeta accesible desde internet. Contiene scripts, estilos, core e imágenes.
+- `public/core/`: Motor interno del sistema (Base de datos y cargador).
 - `tests/`: Batería de pruebas automatizadas.
 - `vendor/`: Librerías instaladas por Composer (no se suben a Git).

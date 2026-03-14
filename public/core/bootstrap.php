@@ -36,7 +36,7 @@ if (!empty($ENA_LOGIN_PATH) && file_exists($ENA_LOGIN_PATH)) {
 // 1. Cargamos la lógica backend (model.php)
 // 2. Cargamos los metadatos visuales del módulo (info.php) para crear el menú
 $MODULOS_INSTALADOS = [];
-$modulos = glob(__DIR__ . '/../public/modulos/*', GLOB_ONLYDIR);
+$modulos = glob(__DIR__ . '/../modulos/*', GLOB_ONLYDIR);
 
 if ($modulos !== false) {
     foreach ($modulos as $dir) {
