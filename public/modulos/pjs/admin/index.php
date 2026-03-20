@@ -10,11 +10,11 @@
 	
 	require_once '../../../config.php';
 	
-	require '../../header.php';
+	require '../../../admin/header.php';
 ?>
 
 		<h1>Personajes</h1>
 <?php
 
-	require '../../footer.php';
+	require '../../../admin/footer.php';
 ?>	
