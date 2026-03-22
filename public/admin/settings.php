@@ -172,7 +172,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
                     <?php endif; ?>
                 </select>
             </div>
-            <input type="submit" name="add_participant" value="Añadir" class="button">
+            <input type="submit" name="add_participant" value="Añadir" style="margin-top: 20px;" class="button">
         </form>
     </div>
 

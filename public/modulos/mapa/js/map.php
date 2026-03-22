@@ -63,7 +63,7 @@ require '../../../config.php';
 				$desc = $e['html'] ?: " ";
 				
 				echo "var marker$id = L.marker([$x,$y], {icon: marker}).addTo(map);";
-				echo "marker$id.bindPopup('<b>$nombre</b><br>$desc');";
+				echo "marker$id.bindPopup('<b>' + ".json_encode($nombre)." + '</b><br>' + ".json_encode($desc).");";
 				
 			}
 			

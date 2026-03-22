@@ -21,7 +21,7 @@ include 'card_mapa.php';
 	<form id='form_add_marcador' method='post' action='controller/add_marcador.php'>
 		<input type="hidden" name="mapa_id" value="<?php echo $_GET['mapa_id'] ?? 1; ?>" />
 		<input type='text' name='nombre' placeholder="Nombre del lugar" />
-		<textarea name='desc' placeholder="Descripción del lugar" ></textarea> 		
+		<textarea name='desc' class="ritcheditor" placeholder="Descripción del lugar" ></textarea> 
 		<input type='hidden' name='x' />
 		<input type='hidden' name='y' />
 		<input id='add_marcador' type='submit' value='Añadir' />
@@ -89,7 +89,7 @@ include 'card_mapa.php';
 			echo '<tr id="marcador'.$m['id'].'">
 				<td>[' . $m['x'].','. $m['y'].']</td>
 				<td><b>' . htmlspecialchars($m['nombre'] ?? 'Sin nombre') . '</b></td>
-				<td>' . htmlspecialchars($m['html'] ?? 'Sin descripción') . '</td>
+				<td>' . ($m['html'] ?? 'Sin descripción') . '</td>
 				<td><a style="text-decoration:none;" href="controller/eliminar_marcador.php?id='.$m['id'].'&mapa_id='.$mapa_id.'" onclick="return confirm(\'¿Eliminar marcador de '.$m['nombre'].'?\');">❌</a></td>
 			</tr>
 			<script type="text/javascript">

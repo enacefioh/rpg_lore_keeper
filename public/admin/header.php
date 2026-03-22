@@ -85,7 +85,16 @@ error_reporting(E_ALL);
             input, select, textarea { padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 15px; width: 100%; box-sizing: border-box; background: #fff; }
             label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; font-size: 0.9rem; }
             .form-group { margin-bottom: 20px; }
+
+            /* Quill Editor Tweaks */
+            .ql-container { font-size: 16px; background: white; min-height: 150px; }
+            .ql-toolbar { background: #eee; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+            .ql-container { border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; }
         </style>
+
+        <!-- Quill Rich Text Editor -->
+        <link href="<?php echo $URL; ?>css/quill.snow.css" rel="stylesheet">
+        <script src="<?php echo $URL; ?>js/quill.min.js"></script>
     </head>
     <body>
 
@@ -119,6 +128,38 @@ error_reporting(E_ALL);
                 sidebar.classList.toggle('open');
                 overlay.classList.toggle('show');
             }
+
+            // Inicialización de Quill Editor
+            document.addEventListener('DOMContentLoaded', function() {
+                const editors = document.querySelectorAll('textarea.ritcheditor');
+                editors.forEach(textarea => {
+                    // 1. Crear contenedor para Quill
+                    const editorContainer = document.createElement('div');
+                    textarea.parentNode.insertBefore(editorContainer, textarea.nextSibling);
+                    textarea.style.display = 'none'; // Ocultar textarea original
+
+                    // 2. Inicializar Quill
+                    const quill = new Quill(editorContainer, {
+                        theme: 'snow',
+                        modules: {
+                            toolbar: [
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline'],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                ['link', 'clean']
+                            ]
+                        }
+                    });
+
+                    // 3. Cargar contenido inicial
+                    quill.root.innerHTML = textarea.value;
+
+                    // 4. Sincronizar cambios al textarea original
+                    quill.on('text-change', function() {
+                        textarea.value = quill.root.innerHTML;
+                    });
+                });
+            });
         </script>
 	<?php
 			if(isset($_GET['err'])){

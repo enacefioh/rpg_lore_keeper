@@ -44,7 +44,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin")){
             </div>
         </div>
         
-        <textarea name='html' placeholder="Escribe aquí su historia y trasfondo..." style="margin-top: 15px; height: 150px;" ></textarea> 		
+        <textarea name='html' class="ritcheditor" placeholder="Escribe aquí su historia y trasfondo..." style="margin-top: 15px; height: 150px;" ></textarea> 
 		
 		<div style="text-align:right; margin-top: 15px;">
             <input id='add_pj' type='submit' value='Crear Personaje ⚔️' class="button" style="padding: 12px 30px; font-weight: bold;" />

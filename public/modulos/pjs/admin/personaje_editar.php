@@ -57,7 +57,7 @@ if(!check_permision($SLUG_UNICO_PARTIDA."_admin") && $pj['usuario'] != $_SESSION
             </div>
         </div>
 
-		<textarea name='html' style='height: 30vh;'><?php echo $pj['texto']; ?></textarea> 
+		<textarea name='html' class="ritcheditor" style='height: 30vh;'><?php echo $pj['texto']; ?></textarea> 
 		<div style="text-align:right; margin-top: 15px;">
             <input type='submit' value='Guardar Cambios 💾' class="button" style="padding: 12px 30px; font-weight: bold;" />
         </div>
